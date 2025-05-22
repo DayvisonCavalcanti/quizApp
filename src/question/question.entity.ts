@@ -10,7 +10,7 @@ export class Question {
   question_text: string;
 
   @Column('json')
-  options: string[]; // Ex: ["opção 1", "opção 2", "opção 3", "opção 4"]
+  options: string[];
 
   @Column()
   correct_answer: string;

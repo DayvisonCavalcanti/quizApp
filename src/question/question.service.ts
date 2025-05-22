@@ -13,29 +13,30 @@ export class QuestionService {
     private quizRepository: Repository<Quiz>,
   ) {}
 
-  // Criar uma nova questão
+  // Criar uma questão
   async createQuestion(
-    questionText: string, 
-    options: string[], 
-    correctAnswer: string, 
-    quizId: number
+    questionText: string,
+    options: string[],
+    correctAnswer: string,
+    quizId: number,
   ): Promise<Question> {
-    // Verificando se o Quiz com o id passado existe
     const quiz = await this.quizRepository.findOne({ where: { id: quizId } });
+    if (!quiz) throw new NotFoundException('Quiz não encontrado');
 
-    if (!quiz) {
-      throw new NotFoundException('Quiz não encontrado');  // Lançando um erro se o Quiz não existir
-    }
-
-    // Criando a questão e associando com o Quiz
     const question = this.questionRepository.create({
-      question_text: questionText, 
-      options, 
-      correct_answer: correctAnswer, 
-      quiz: quiz,  // Passando o Quiz encontrado diretamente aqui
+      question_text: questionText,
+      options,
+      correct_answer: correctAnswer,
+      quiz, // Associa ao quiz encontrado
     });
 
-    // Salvando e retornando a nova questão
     return this.questionRepository.save(question);
+  }
+
+  // Buscar todas as questões
+  async getAllQuestions(): Promise<Question[]> {
+    return this.questionRepository.find({ 
+      relations: ['quiz'], // Carrega os dados do quiz
+    });
   }
 }
