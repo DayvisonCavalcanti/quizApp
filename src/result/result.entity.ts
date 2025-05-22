@@ -7,10 +7,10 @@ export class Result {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.results) // Relação corrigida
   user: User;
 
-  @ManyToOne(() => Quiz)
+  @ManyToOne(() => Quiz, (quiz) => quiz.results) // Relação corrigida
   quiz: Quiz;
 
   @Column()
