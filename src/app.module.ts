@@ -16,8 +16,8 @@ import {User} from './user/user.entity'
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'D4YV1S0N39',  // Substitua pela senha do seu banco
-      database: 'quiz_app',
+      password: '123456',  // Substitua pela senha do seu banco
+      database: 'quizzes_db',
   entities: [__dirname + '/**/*.entity{.ts,.js}'], // Caminho das entidades
       synchronize: true,  // Cuidado, em produção, use migrations!
         logging: true,  // Ativa o log para ver as consultas SQL
